@@ -15,8 +15,11 @@ Movie Search App is built using HTML, CSS, JavaScript & TMDB API.
 ------------------------------------------------
             Progresso do Remake
 ------------------------------------------------
-- Dia 18/08/2026 (Período de Aula): Fiz alterações visuais na identidade do site, sendo elas:
-      - Adição da nova logo e nome do projeto.
-      - Alteração da Paleta de Cores do Site para o tema claro.
-Estou trabalhando para mexer na alteração para o "Tema Escuro" no período da tarde e adicionar alguns dos requisitos visuais do cliente.
+
+**Dia 18/08/2026 (Período de Aula): Fiz alterações visuais na identidade do site, sendo elas:**
+- Alteração da logo e tema principal do site
+- Alteração do tema escuro do site
+- Tradução de dados inicialmente expostos em inglês (fixos, HTML)
+
+Estou buscando como adicionar diferentes tipos de caixas de texto para trabalhar em cima da Caixa de Pesquisa (necessita da criação de uma nova fonte) e para adicionar a capa dos filmes sob determinados efeitos visuais no background.
 Utilizei o chatGPT para adaptar a logo existente e o CanvaAI para remover o fundo da nova versão da imagem para utilização. A parte de colorações e alteração de textos já era de meu conhecimento prévio (única coisa que me recordo em html/css que aprendi no 1°semestre kkkk)

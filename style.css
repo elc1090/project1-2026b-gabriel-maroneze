@@ -9,15 +9,16 @@
     --body-bg-color: #fff;
     --movie-input-bg-color: #fff;
     --logo-color: #000;
-    --primary-text-color: #d6078e;
-    --secondary-text-color: #000;
-    --primary-border-color: #d9008d;
+    --primary-text-color: #ab0a10;
+    --secondary-text-color: #000000;
+    --primary-border-color: #a60b13;
 }
 
 /* Body Starts Here */
 body {
     background-color: var(--body-bg-color);
 }
+
 /* Body Ends Here */
 
 /* Header Section Starts Here */
@@ -57,11 +58,12 @@ header {
 
 .theme-mode-btns i.dark-mode {
     display: none;
-    color: rgb(214, 7, 142);
+    color: rgb(99, 3, 3);
     border: 2px solid #fff;
     border-radius: 18px;
     padding: 0px 3px;
 }
+
 /* Header Section Ends Here */
 
 /* Input Section Starts Here */
@@ -80,7 +82,7 @@ header {
     width: 400px;
     background-color: var(--movie-input-bg-color);
     border: 1px solid;
-    outline-color: rgb(217, 0, 141);
+    outline-color: rgb(173, 7, 26);
     transition: all .8s ease-out;
 }
 
@@ -89,7 +91,8 @@ header {
 }
 
 .input-field .search-movie-list-container {
-    background-color: rgb(219, 157, 197);
+    background-color: rgb(216, 63, 88);
+    /* movie-titles-color: rgb(255, 255, 255); */
     max-height: 399px;
     width: 490px;
     padding: 3px 2px;
@@ -105,14 +108,15 @@ header {
     font-size: 1rem;
     margin: 3px;
     padding: 2px;
-    background-color: rgb(235, 58, 176);
+    background-color: rgb(237, 50, 50);
     cursor: pointer;
     transition: all .2s;
 }
 
 .input-field .search-movie-list-container p:hover {
-    background-color: rgb(233, 100, 189);
+    background-color: rgb(237, 50, 50);
 }
+
 /* Input Section Ends Here */
 
 /* Movie Container Starts Here */
@@ -212,12 +216,14 @@ header {
     text-align: center;
     font-size: 1.1rem;
 }
+
 /* Movie Container Ends Here */
 
 
 /* Responsive Design - Media Query */
 
 @media screen and (max-width:1024px) {
+
     /* Movie Container Starts Here */
     .movie-details-container .movie-image img {
         height: 450px;
@@ -240,7 +246,7 @@ header {
     .movie-container .cast-details-container h1 {
         font-size: 2.3rem;
     }
-    
+
     .cast-details-container .cast-details {
         grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
@@ -248,10 +254,12 @@ header {
     .cast-details-container .cast-details .cast img {
         height: 220px;
     }
+
     /* Movie Container Ends Here */
 }
 
 @media screen and (max-width:768px) {
+
     /* Header Section Starts Here */
     header .logo img {
         height: 50px;
@@ -264,6 +272,7 @@ header {
     header .theme-mode-btns i {
         font-size: 1.8rem;
     }
+
     /* Header Section Ends Here */
 
     /* Movie Container Starts Here */
@@ -307,15 +316,18 @@ header {
     .cast-details-container .cast-details .cast p {
         font-size: .9rem;
     }
+
     /* Movie Container Ends Here */
 }
 
 @media screen and (max-width:576px) {
+
     /* Header Section Starts Here */
     header .logo {
         justify-content: flex-start;
         padding: 15px 15px;
     }
+
     header .logo img {
         height: 35px;
     }
@@ -332,6 +344,7 @@ header {
     header .theme-mode-btns i {
         font-size: 1.2rem;
     }
+
     /* Header Section Ends Here */
 
     /* Input Section Starts Here */
@@ -346,6 +359,7 @@ header {
     .input-field .search-movie-list-container {
         width: 325px;
     }
+
     /* Input Section Ends Here */
 
     /* Movie Container Starts Here */
@@ -360,7 +374,7 @@ header {
 
     .movie-details-container .movie-details .movie-heading {
         font-size: 1.2rem;
-    }    
+    }
 
     .movie-details-container .movie-details .movie-original-name,
     .movie-details-container .movie-details .movie-original-name span,
@@ -387,10 +401,12 @@ header {
     .cast-details-container .cast-details .cast p {
         font-size: .8rem;
     }
+
     /* Movie Container Ends Here */
 }
 
 @media screen and (max-width:450px) {
+
     /* Movie Container Starts Here */
     .movie-details-container .movie-details .ratings,
     .cast-details-container .cast-details {
@@ -400,10 +416,12 @@ header {
     .cast-details-container .cast-details .cast img {
         height: 230px;
     }
+
     /* Movie Container Ends Here */
 }
 
 @media screen and (max-width:369px) {
+
     /* Input Section Starts Here */
     .input-field input {
         width: 200px;
@@ -421,6 +439,7 @@ header {
     .input-field .search-movie-list-container p {
         font-size: .8rem;
     }
+
     /* Input Section Ends Here */
 
     /* Movie Container Starts Here */
@@ -430,7 +449,7 @@ header {
 
     .movie-details-container .movie-details .movie-heading {
         font-size: 1rem;
-    }    
+    }
 
     .movie-details-container .movie-details .movie-original-name,
     .movie-details-container .movie-details .movie-original-name span,
@@ -452,6 +471,7 @@ header {
         height: 300px;
         width: 220px;
     }
+
     /* Movie Container Ends Here */
 }
 

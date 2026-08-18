@@ -188,8 +188,8 @@ const toggleTheme = (e) => {
         root.style.setProperty('--movie-search-bg-color', "#fff");
         root.style.setProperty('--logo-color', "#000");
         root.style.setProperty('--secondary-text-color', "#000");
-        root.style.setProperty('--primary-text-color', "#d6078e");
-        root.style.setProperty('--primary-border-color', "#d9008d");
+        root.style.setProperty('--primary-text-color', "#cb2424");
+        root.style.setProperty('--primary-border-color', "#cc3434");
     }
     else {
         const root = document.documentElement;
@@ -197,8 +197,8 @@ const toggleTheme = (e) => {
         root.style.setProperty('--movie-search-bg-color', "#11235A");
         root.style.setProperty('--logo-color', "#fff");
         root.style.setProperty('--secondary-text-color', "#fff");
-        root.style.setProperty('--primary-text-color', "#fc61c6");
-        root.style.setProperty('--primary-border-color', "#ff54c3");
+        root.style.setProperty('--primary-text-color', "#e63b46");
+        root.style.setProperty('--primary-border-color', "#eb3a49");
     }
 };
 

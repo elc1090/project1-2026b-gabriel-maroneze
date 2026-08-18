@@ -21,7 +21,7 @@ const findGenres = async (genre_ids) => {
     const genres = [];
 
     const res = fetch(apiPaths.findGenres);
-    
+
     try {
         const res_1 = await res;
         const res_2 = await res_1.json();
@@ -34,8 +34,8 @@ const findGenres = async (genre_ids) => {
             }
         });
         return genres;
-    } 
-    catch(error) {
+    }
+    catch (error) {
         console.log(error);
     }
 };
@@ -60,11 +60,11 @@ const addCastToCastDetailsContainer = async (movieId) => {
     try {
         const res_1 = await res;
         const res_2 = await res_1.json();
-        const castDetails = res_2.cast.slice(0,10);
-        
-        if(castDetails.length !== 0) {
+        const castDetails = res_2.cast.slice(0, 10);
+
+        if (castDetails.length !== 0) {
             castContainer.style.display = 'block';
-        } 
+        }
         else {
             castContainer.style.display = 'none';
         }
@@ -85,7 +85,7 @@ const addCastToCastDetailsContainer = async (movieId) => {
             castDetailsContainer.appendChild(cast);
         });
     }
-    catch(error) {
+    catch (error) {
         console.log(error);
     }
 };
@@ -94,7 +94,7 @@ const showMovieDetails = (movieObj) => {
     return (e) => {
         const movieImageURL = movieObj.poster_path !== null ? baseURL + movieObj.poster_path : "./images/gray background.jpg";
         const movieName = movieObj.title;
-        const releaseYear = "(" + movieObj.release_date.substring(0,4) + ")";
+        const releaseYear = "(" + movieObj.release_date.substring(0, 4) + ")";
         const originalTitle = movieObj.original_title;
         const ratings = movieObj.vote_average.toFixed(1);
         const movieDescription = movieObj.overview;
@@ -111,19 +111,19 @@ const showMovieDetails = (movieObj) => {
         originalTitleElement.textContent = originalTitle;
         ratingsElement.textContent = ratings;
         movieDescriptionElement.textContent = movieDescription;
-        const res = findGenres(movieObj.genre_ids.slice(0,5));
+        const res = findGenres(movieObj.genre_ids.slice(0, 5));
         res
-        .then(genres => {
-            clearGenresList(genresList);
-            genres.forEach(genre => {
-                const li = document.createElement('li');
-                li.textContent = genre;
-                genresList.appendChild(li);
-            });
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(genres => {
+                clearGenresList(genresList);
+                genres.forEach(genre => {
+                    const li = document.createElement('li');
+                    li.textContent = genre;
+                    genresList.appendChild(li);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
 
         addCastToCastDetailsContainer(movieObj.id);
 
@@ -141,7 +141,7 @@ const clearSearchMovieListContainer = () => {
 };
 
 const buildSearchMovieList = (moviesList) => {
-    if(searchInput.value !== "") {
+    if (searchInput.value !== "") {
         searchMovieListContainer.style.display = "block";
     }
     else {
@@ -163,17 +163,17 @@ const searchMovie = (e) => {
     const res = fetch(apiPaths.searchMovie(searchInput.value));
 
     res
-    .then(res => res.json())
-    .then(res => {
-        buildSearchMovieList(res.results.slice(0,10));
-    })
-    .catch(error => {
-        console.log(error);
-    });
+        .then(res => res.json())
+        .then(res => {
+            buildSearchMovieList(res.results.slice(0, 10));
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };
 
 const toggleTheme = (e) => {
-    if(lightModeBtn.style.display !== "none") {
+    if (lightModeBtn.style.display !== "none") {
         darkModeBtn.style.display = "block";
         lightModeBtn.style.display = "none";
     }
@@ -182,7 +182,7 @@ const toggleTheme = (e) => {
         lightModeBtn.style.display = "block";
     }
 
-    if(lightModeBtn.style.display !== "none") {
+    if (lightModeBtn.style.display !== "none") {
         const root = document.documentElement;
         root.style.setProperty('--body-bg-color', "#fff");
         root.style.setProperty('--movie-search-bg-color', "#fff");
@@ -193,8 +193,8 @@ const toggleTheme = (e) => {
     }
     else {
         const root = document.documentElement;
-        root.style.setProperty('--body-bg-color', "#200E3A");
-        root.style.setProperty('--movie-search-bg-color', "#11235A");
+        root.style.setProperty('--body-bg-color', "#570909");
+        root.style.setProperty('--movie-search-bg-color', "#570606");
         root.style.setProperty('--logo-color', "#fff");
         root.style.setProperty('--secondary-text-color', "#fff");
         root.style.setProperty('--primary-text-color', "#e63b46");
@@ -206,7 +206,7 @@ const hideSearchMovieListContainer = (e) => {
     setTimeout(() => {
         searchMovieListContainer.style.display = "none";
     }, 130);
-}; 
+};
 
 searchInput.addEventListener('input', searchMovie);
 searchInput.addEventListener('focusout', hideSearchMovieListContainer);

@@ -16,6 +16,8 @@ const searchMovieListContainer = document.querySelector('.search-movie-list-cont
 const movieContainer = document.querySelector('.movie-container');
 const castContainer = document.querySelector('.movie-container .cast-details-container');
 const castDetailsContainer = document.querySelector('.movie-container .cast-details-container .cast-details');
+const adultContentElement = document.querySelector('.movie-details-container .movie-details .adult-content span');
+const originalLanguageElement = document.querySelector('.movie-details-container .movie-details .original-language span');
 
 const findGenres = async (genre_ids) => {
     const genres = [];
@@ -38,6 +40,37 @@ const findGenres = async (genre_ids) => {
     catch (error) {
         console.log(error);
     }
+};
+
+const getAdultContent = (adult) => {
+    if (adult == true) {
+        return "Sim";
+    } else {
+        return "Não";
+    }
+    return "Não Informado";
+};
+
+const getOriginalLanguage = (language) => {
+
+    if (!language) {
+        return "Não Informado";
+    }
+
+    const languages = {
+        en: "Inglês",
+        pt: "Português",
+        es: "Espanhol",
+        fr: "Francês",
+        de: "Alemão",
+        it: "Italiano",
+        ja: "Japonês",
+        ko: "Coreano",
+        zh: "Chinês",
+        ru: "Russo",
+        hi: "Hindi",
+    };
+    return languages[language] || language; // "||language" retorna "undefined" ao não encontrar uma linguagem na lista
 };
 
 const clearGenresList = (genresList) => {
@@ -99,6 +132,9 @@ const showMovieDetails = (movieObj) => {
         const ratings = movieObj.vote_average.toFixed(1);
         const movieDescription = movieObj.overview;
 
+        const adultContent = getAdultContent(movieObj.adult);
+        const originalLanguage = getOriginalLanguage(movieObj.original_language);
+
         const movieImageElement = document.querySelector('.movie-details-container .movie-image img');
         const movieNameElement = document.querySelector('.movie-details-container .movie-details .movie-name');
         const originalTitleElement = document.querySelector('.movie-details-container .movie-details .movie-original-name span');
@@ -111,6 +147,9 @@ const showMovieDetails = (movieObj) => {
         originalTitleElement.textContent = originalTitle;
         ratingsElement.textContent = ratings;
         movieDescriptionElement.textContent = movieDescription;
+        adultContentElement.textContent = adultContent;
+        originalLanguageElement.textContent = originalLanguage;
+
         const res = findGenres(movieObj.genre_ids.slice(0, 5));
         res
             .then(genres => {

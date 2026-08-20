@@ -183,6 +183,16 @@ header {
     text-align: justify;
 }
 
+.movie-details-container .movie-details .original-language {
+    margin: 20px 0;
+    font-size: 1.1rem;
+}
+
+.movie-details-container .movie-details .adult-content {
+    margin: 20px 0;
+    font-size: 1.1rem;
+}
+
 .movie-container .cast-details-container {
     display: none;
     margin: 30px 0;

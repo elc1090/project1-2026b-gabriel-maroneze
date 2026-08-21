@@ -28,6 +28,9 @@ Utilizei o chatGPT para adaptar a logo existente e o CanvaAI para remover o fund
 **Dia 20/08/2026 (Período de Aula e pré-aula): Adição de novas informações sobre cada filme, conforme solicitado na requisição**
 - Alteração dos arquivos Javascript e HTML para a funcionalidade de buscar o indicador de Conteúdo Adulto e Linguagem Original do filme
 - Alteração do arquivo styleCSS para padronizar a aparição das informações conforme as demais já existentes
+- **Pós Aula:** Acrescentei o botão para a aba de favoritos
+
+**Dia 21/08/2026:**
 
 
 

@@ -19,6 +19,16 @@ const castDetailsContainer = document.querySelector('.movie-container .cast-deta
 const adultContentElement = document.querySelector('.movie-details-container .movie-details .adult-content span');
 const originalLanguageElement = document.querySelector('.movie-details-container .movie-details .original-language span');
 
+const favoriteBtn = document.querySelector('.favorite-btn');
+const favoriteIcon = document.querySelector('i');
+const favoriteText = document.querySelector('span');
+
+let currentMovie = null;
+
+const favoritesBtn = document.querySelector('favorites-bt');
+const favoritesListContainer = document.querySelector('favorites-list-container');
+
+
 const findGenres = async (genre_ids) => {
     const genres = [];
 
@@ -73,6 +83,17 @@ const getOriginalLanguage = (language) => {
     return languages[language] || language; // "||language" retorna "undefined" ao não encontrar uma linguagem na lista
 };
 
+const toggleFavoriteButton = () => {
+    const isFavorite = favoriteBtn.classList.toggle('active');
+
+    favoriteIcon.classList.toggle('fa-regular, !isFavorite');
+    favoriteIcon.classList.toggle('fa-solid, isFavorite');
+
+    favoriteText.textContent = isFavorite
+        ? "Favoritado" :
+        "Adicionar aos Favoritos";
+};
+
 const clearGenresList = (genresList) => {
     Array.from(genresList.children).forEach(children => {
         children.remove();
@@ -125,6 +146,11 @@ const addCastToCastDetailsContainer = async (movieId) => {
 
 const showMovieDetails = (movieObj) => {
     return (e) => {
+        currentMovie = movieObj;
+
+        const movieIsFavorite = isFavoriteMovie(movieObj.obj);
+        updatedFavoriteButton(movieIsFavorite);
+
         const movieImageURL = movieObj.poster_path !== null ? baseURL + movieObj.poster_path : "./images/gray background.jpg";
         const movieName = movieObj.title;
         const releaseYear = "(" + movieObj.release_date.substring(0, 4) + ")";
@@ -241,13 +267,74 @@ const toggleTheme = (e) => {
     }
 };
 
+const toggleFavoritesList = () => {
+    if (favoritesListContainer.style.display === "block") {
+        favoritesListContainer = "none";
+    } else {
+        favoritesListContainer = "block";
+    }
+}
+
 const hideSearchMovieListContainer = (e) => {
     setTimeout(() => {
         searchMovieListContainer.style.display = "none";
     }, 130);
 };
 
+const getFavorites = () => {
+    const favorites = localStorage.getItem('favorites');
+
+    if (favorites == null) {
+        return [];
+    }
+    return JSON.parse(favorites);
+};
+
+const saveFavorites = (favorites) => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+};
+
+const isMovieFavorite = (movieId) => {
+    const favorites = getFavorites();
+
+    return favorites.some(movie => movie.id === movieId);
+};
+
+const updatedFavoriteButton = (isFavorite) => {
+    favoriteBtn.classList.toggle('active', isFavorite);
+
+    favoriteIcon.classList.toggle('fa-regular', !isFavorite);
+    favoriteIcon.classList.toggle('fa-solid', isFavorite);
+
+    favoriteText.textContent = isFavorite
+        ? 'Favoritado'
+        : 'Adicionar aos Favoritos';
+};
+
+const toggleFavorite = () => {
+    if (currentMovie === null) {
+        return;
+    }
+
+    const favorites = getFavorites();
+    const movieIsFavorite = favorites.some(movie => movie.id === currentMovie.id);
+
+    if (movieIsFavorite) {
+        const updatedFavorites = favorites.filter(movie => movie.id !== currentMovie.id);
+
+        saveFavorites(updatedFavorites);
+        updatedFavoriteButton(false);
+    } else {
+        favorites.push(currentMovie);
+
+        saveFavorites(favorite);
+        updatedFavoriteButton(true);
+    }
+};
+
 searchInput.addEventListener('input', searchMovie);
 searchInput.addEventListener('focusout', hideSearchMovieListContainer);
 lightModeBtn.addEventListener('click', toggleTheme);
 darkModeBtn.addEventListener('click', toggleTheme);
+favoritesBtn.addEventListener('click', toggleFavoritesList);
+favoriteBtn.addEventListener('click', toggleFavorite);

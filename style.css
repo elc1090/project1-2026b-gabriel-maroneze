@@ -64,6 +64,52 @@ header {
     padding: 0px 3px;
 }
 
+.favorites-container {
+    position: absolute;
+    top: 22px;
+    left: 20px;
+    z-index: 10p;
+}
+
+.favorites-btn {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    width: 260px;
+    padding: 12px;
+
+    background-color: var();
+
+    border: 2px solid var();
+    border-radius: 8px;
+
+    font-family: 'Segoe UI', Tohama, Verdana, Geneva, Tahoma, sans-serif;
+    color: var();
+
+    z-index: 10;
+}
+
+.favorites-btn:hover {
+    background-color: var();
+    color: #fff;
+}
+
+.favorites-list-container {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 260px;
+    padding: 12px;
+    background-color: var();
+    border: 2px solid var();
+    border-radius: 8px;
+    font-family: 'Segoe Ui', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var();
+    z-index: 10;
+}
+
 /* Header Section Ends Here */
 
 /* Input Section Starts Here */
@@ -148,6 +194,36 @@ header {
     column-gap: 6px;
     font-size: 2rem;
     color: var(--primary-text-color);
+}
+
+.movie-details-container .movie-details .favorite-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    background-color: transparent;
+    color: var(--primary-text-color);
+
+    border: 2px solid var(--primary-border-color);
+    border-radius: 8px;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+}
+
+.movie-details-container .movie-details .favorite-btn:hover {
+    background-color: var(--primary-text-color);
+    color: var(--body-bg-color);
+}
+
+.movie-details-container .movie-details .favorite-btn.active {
+    background-color: var(--primary-text-color);
+    color: var(--body-bg-color);
 }
 
 .movie-details-container .movie-details .movie-original-name,
@@ -410,6 +486,25 @@ header {
 
     .cast-details-container .cast-details .cast p {
         font-size: .8rem;
+    }
+
+    .favorites-container {
+        top: 20px;
+        left: 15px;
+    }
+
+    .favorites-btn {
+        padding: 6px, 8px;
+        font-size: 9rem;
+    }
+
+    .favorites-btn span {
+        display: none;
+    }
+
+    .favorites-list-container {
+        width: 220px;
+        top: 42px;
     }
 
     /* Movie Container Ends Here */

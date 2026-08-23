@@ -28,6 +28,7 @@ header {
 
 .logo {
     display: flex;
+    align-items: center;
     justify-content: center;
     column-gap: .7rem;
     padding: 10px 0;
@@ -61,7 +62,7 @@ header {
     color: rgb(237, 66, 66);
     border: 2px solid #fff;
     border-radius: 18px;
-    padding: 0px 3px;
+    padding: 0 3px;
 }
 
 .movie-lists-menu {
@@ -143,18 +144,24 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
+
     margin: 30px 0;
+
     position: relative;
 }
 
 .input-field input {
-    padding: 10px 5px;
-    font-size: 1.1rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     width: 400px;
+    padding: 10px 5px;
+
     background-color: var(--movie-input-bg-color);
+
     border: 1px solid;
     outline-color: rgb(173, 7, 26);
+
+    font-size: 1.1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
     transition: all .8s ease-out;
 }
 
@@ -163,25 +170,33 @@ header {
 }
 
 .input-field .search-movie-list-container {
-    background-color: rgb(216, 63, 88);
-    /* movie-titles-color: rgb(255, 255, 255); */
-    max-height: 399px;
-    width: 490px;
-    padding: 3px 2px;
-    border-radius: 0 0 6px 6px;
     display: none;
-    overflow: hidden;
+
     position: absolute;
     top: 48px;
+
+    width: 490px;
+    max-height: 399px;
+    padding: 3px 2px;
+
+    background-color: rgb(216, 63, 88);
+
+    border-radius: 0 0 6px 6px;
+
+    overflow: hidden;
 }
 
 .input-field .search-movie-list-container p {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 1rem;
     margin: 3px;
     padding: 2px;
+
     background-color: rgb(237, 50, 50);
+
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1rem;
+
     cursor: pointer;
+
     transition: all .2s;
 }
 
@@ -194,8 +209,17 @@ header {
 /* Movie Container Starts Here */
 .movie-container {
     display: none;
+
     padding: 40px 70px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    font-family:
+        'Trebuchet MS',
+        'Lucida Sans Unicode',
+        'Lucida Grande',
+        'Lucida Sans',
+        Arial,
+        sans-serif;
+
     color: var(--secondary-text-color);
 }
 
@@ -210,43 +234,38 @@ header {
 
 .movie-details-container .movie-image img {
     height: 600px;
-    border-radius: 10px;
+
     border: 2px solid var(--primary-border-color);
+    border-radius: 10px;
 }
 
 .movie-details-container .movie-details .movie-heading {
     display: flex;
     align-items: center;
     column-gap: 6px;
+
     font-size: 2rem;
     color: var(--primary-text-color);
 }
 
-.movie-details-container .movie-details .favorite-btn {
+.movie-details-container .movie-details .movie-actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    flex-wrap: wrap;
+    gap: 10px;
 
-    padding: 8px 12px;
-
-    background-color: transparent;
-    color: var(--primary-text-color);
-
-    border: 2px solid var(--primary-border-color);
-    border-radius: 8px;
-
-    font-size: 1rem;
-
-    cursor: pointer;
-
-    transition: all .2s ease;
+    margin: 12px 0 20px;
 }
 
+.movie-details-container .movie-details .favorite-btn,
 .movie-details-container .movie-details .watched-btn {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
 
+    width: 220px;
+    min-height: 42px;
     padding: 8px 12px;
 
     background-color: transparent;
@@ -262,18 +281,10 @@ header {
     transition: all .2s ease;
 }
 
+.movie-details-container .movie-details .favorite-btn:hover,
+.movie-details-container .movie-details .favorite-btn.active,
 .movie-details-container .movie-details .watched-btn:hover,
 .movie-details-container .movie-details .watched-btn.active {
-    background-color: var(--primary-text-color);
-    color: var(--body-bg-color);
-}
-
-.movie-details-container .movie-details .favorite-btn:hover {
-    background-color: var(--primary-text-color);
-    color: var(--body-bg-color);
-}
-
-.movie-details-container .movie-details .favorite-btn.active {
     background-color: var(--primary-text-color);
     color: var(--body-bg-color);
 }
@@ -287,8 +298,10 @@ header {
 .movie-details-container .movie-details .genres {
     display: flex;
     column-gap: 10px;
-    font-size: 1.2rem;
+
     margin: 20px 0;
+
+    font-size: 1.2rem;
 }
 
 .movie-details-container .movie-details .genres .genres-list {
@@ -307,6 +320,7 @@ header {
 
 .movie-details-container .movie-details .description {
     margin: 20px 0;
+
     font-size: 1.1rem;
     text-align: justify;
 }
@@ -337,7 +351,8 @@ header {
     grid-template-rows: repeat(5, auto);
     column-gap: 50px;
     row-gap: 30px;
-    margin: 20px 0 10px 0;
+
+    margin: 20px 0 10px;
 }
 
 .cast-details-container .cast-details .cast {
@@ -346,8 +361,9 @@ header {
 
 .cast-details-container .cast-details .cast img {
     height: 300px;
-    border-radius: 10px;
+
     border: 2px solid var(--primary-border-color);
+    border-radius: 10px;
 }
 
 .cast-details-container .cast-details .cast p {
@@ -357,12 +373,8 @@ header {
 
 /* Movie Container Ends Here */
 
-
 /* Responsive Design - Media Query */
-
-@media screen and (max-width:1024px) {
-
-    /* Movie Container Starts Here */
+@media screen and (max-width: 1024px) {
     .movie-details-container .movie-image img {
         height: 450px;
     }
@@ -386,17 +398,16 @@ header {
     }
 
     .cast-details-container .cast-details {
-        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        grid-template-columns:
+            repeat(auto-fit, minmax(120px, 1fr));
     }
 
     .cast-details-container .cast-details .cast img {
         height: 220px;
     }
-
-    /* Movie Container Ends Here */
 }
 
-@media screen and (max-width:768px) {
+@media screen and (max-width: 768px) {
 
     /* Header Section Starts Here */
     header .logo img {
@@ -423,8 +434,8 @@ header {
     }
 
     .movie-details-container .movie-image img {
-        height: 500px;
         width: 100%;
+        height: 500px;
     }
 
     .movie-details-container .movie-details {
@@ -444,7 +455,8 @@ header {
     }
 
     .cast-details-container .cast-details {
-        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        grid-template-columns:
+            repeat(auto-fit, minmax(90px, 1fr));
     }
 
     .cast-details-container .cast-details .cast img {
@@ -458,12 +470,12 @@ header {
     /* Movie Container Ends Here */
 }
 
-@media screen and (max-width:576px) {
+@media screen and (max-width: 576px) {
 
     /* Header Section Starts Here */
     header .logo {
         justify-content: flex-start;
-        padding: 15px 15px;
+        padding: 15px;
     }
 
     header .logo img {
@@ -502,12 +514,12 @@ header {
 
     /* Movie Container Starts Here */
     .movie-container {
-        padding: 10px 10px;
+        padding: 10px;
     }
 
     .movie-details-container .movie-image img {
-        height: 400px;
         width: 400px;
+        height: 400px;
     }
 
     .movie-details-container .movie-details .movie-heading {
@@ -523,12 +535,13 @@ header {
     }
 
     .movie-container .cast-details-container {
-        margin: 0px 0;
+        margin: 0;
     }
 
     .cast-details-container .cast-details {
-        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns:
+            repeat(auto-fit, minmax(150px, 1fr));
+
         place-items: center;
     }
 
@@ -569,22 +582,18 @@ header {
     /* Movie Container Ends Here */
 }
 
-@media screen and (max-width:450px) {
-
-    /* Movie Container Starts Here */
-    .movie-details-container .movie-details .ratings,
+@media screen and (max-width: 450px) {
     .cast-details-container .cast-details {
-        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        grid-template-columns:
+            repeat(auto-fit, minmax(110px, 1fr));
     }
 
     .cast-details-container .cast-details .cast img {
         height: 230px;
     }
-
-    /* Movie Container Ends Here */
 }
 
-@media screen and (max-width:369px) {
+@media screen and (max-width: 369px) {
 
     /* Input Section Starts Here */
     .input-field input {
@@ -624,16 +633,15 @@ header {
     }
 
     .cast-details-container .cast-details {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    }
+        grid-template-columns:
+            repeat(auto-fit, minmax(150px, 1fr));
 
-    .cast-details-container .cast-details {
         place-items: center;
     }
 
     .cast-details-container .cast-details .cast img {
-        height: 300px;
         width: 220px;
+        height: 300px;
     }
 
     /* Movie Container Ends Here */

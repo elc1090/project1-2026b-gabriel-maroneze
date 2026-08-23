@@ -469,4 +469,4 @@ darkModeBtn.addEventListener('click', toggleTheme);
 favoritesBtn.addEventListener('click', toggleFavoritesList);
 favoriteBtn.addEventListener('click', toggleFavorite);
 watchedBtn.addEventListener('click', toggleWatched);
-watchedBtn.addEventListener('clikc', toggleWatchedList);
+watchedBtn.addEventListener('click', toggleWatchedList);

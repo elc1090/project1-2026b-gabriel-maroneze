@@ -20,13 +20,13 @@ const adultContentElement = document.querySelector('.movie-details-container .mo
 const originalLanguageElement = document.querySelector('.movie-details-container .movie-details .original-language span');
 
 const favoriteBtn = document.querySelector('.favorite-btn');
-const favoriteIcon = document.querySelector('i');
-const favoriteText = document.querySelector('span');
+const favoriteIcon = favoriteBtn.querySelector('i');
+const favoriteText = favoriteBtn.querySelector('span');
 
 let currentMovie = null;
 
-const favoritesBtn = document.querySelector('favorites-bt');
-const favoritesListContainer = document.querySelector('favorites-list-container');
+const favoritesBtn = document.querySelector('.favorites-btn');
+const favoritesListContainer = document.querySelector('.favorites-list-container');
 
 
 const findGenres = async (genre_ids) => {
@@ -83,17 +83,6 @@ const getOriginalLanguage = (language) => {
     return languages[language] || language; // "||language" retorna "undefined" ao não encontrar uma linguagem na lista
 };
 
-const toggleFavoriteButton = () => {
-    const isFavorite = favoriteBtn.classList.toggle('active');
-
-    favoriteIcon.classList.toggle('fa-regular, !isFavorite');
-    favoriteIcon.classList.toggle('fa-solid, isFavorite');
-
-    favoriteText.textContent = isFavorite
-        ? "Favoritado" :
-        "Adicionar aos Favoritos";
-};
-
 const clearGenresList = (genresList) => {
     Array.from(genresList.children).forEach(children => {
         children.remove();
@@ -148,14 +137,16 @@ const showMovieDetails = (movieObj) => {
     return (e) => {
         currentMovie = movieObj;
 
-        const movieIsFavorite = isFavoriteMovie(movieObj.obj);
+        const movieIsFavorite = isMovieFavorite(movieObj.id);
         updatedFavoriteButton(movieIsFavorite);
 
         const movieImageURL = movieObj.poster_path !== null ? baseURL + movieObj.poster_path : "./images/gray background.jpg";
         const movieName = movieObj.title;
-        const releaseYear = "(" + movieObj.release_date.substring(0, 4) + ")";
+        const releaseYear = movieObj.release_date
+            ? `(${movieObj.release_date.substring(0, 4)})`
+            : "";
         const originalTitle = movieObj.original_title;
-        const ratings = movieObj.vote_average.toFixed(1);
+        const ratings = Number(movieObj.vote_average).toFixed(1);
         const movieDescription = movieObj.overview;
 
         const adultContent = getAdultContent(movieObj.adult);
@@ -267,14 +258,6 @@ const toggleTheme = (e) => {
     }
 };
 
-const toggleFavoritesList = () => {
-    if (favoritesListContainer.style.display === "block") {
-        favoritesListContainer = "none";
-    } else {
-        favoritesListContainer = "block";
-    }
-}
-
 const hideSearchMovieListContainer = (e) => {
     setTimeout(() => {
         searchMovieListContainer.style.display = "none";
@@ -287,7 +270,14 @@ const getFavorites = () => {
     if (favorites == null) {
         return [];
     }
-    return JSON.parse(favorites);
+    try {
+        const parsedFavorites = JSON.parse(favorites);
+        return Array.isArray(parsedFavorites) ? parsedFavorites : [];
+    }
+    catch (error) {
+        console.warn('Os favoritos armazenados estavam inválidos e foram ignorados.', error);
+        return [];
+    }
 };
 
 const saveFavorites = (favorites) => {
@@ -311,6 +301,35 @@ const updatedFavoriteButton = (isFavorite) => {
         : 'Adicionar aos Favoritos';
 };
 
+const renderFavoritesList = () => {
+    const favorites = getFavorites();
+    favoritesListContainer.replaceChildren();
+
+    if (favorites.length === 0) {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.textContent = 'Nenhum filme favoritado';
+        favoritesListContainer.appendChild(emptyMessage);
+        return;
+    }
+
+    favorites.forEach(movie => {
+        const movieItem = document.createElement('p');
+        movieItem.textContent = movie.title;
+        movieItem.addEventListener('click', showMovieDetails(movie));
+        favoritesListContainer.appendChild(movieItem);
+    });
+};
+
+const toggleFavoritesList = () => {
+    const listIsOpen = favoritesListContainer.style.display === 'block';
+
+    if (!listIsOpen) {
+        renderFavoritesList();
+    }
+
+    favoritesListContainer.style.display = listIsOpen ? 'none' : 'block';
+};
+
 const toggleFavorite = () => {
     if (currentMovie === null) {
         return;
@@ -327,9 +346,11 @@ const toggleFavorite = () => {
     } else {
         favorites.push(currentMovie);
 
-        saveFavorites(favorite);
+        saveFavorites(favorites);
         updatedFavoriteButton(true);
     }
+
+    renderFavoritesList();
 };
 
 searchInput.addEventListener('input', searchMovie);

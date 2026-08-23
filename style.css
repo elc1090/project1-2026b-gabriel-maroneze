@@ -110,6 +110,62 @@ header {
     z-index: 10;
 }
 
+.watched-container {
+    position: absolute;
+    top: 76px;
+    left: 20px;
+    z-index: 9;
+}
+
+.watched-list-btn {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+
+    width: 260px;
+    padding: 12px;
+
+    background-color: var(--body-bg-color);
+
+    border: 2px solid var(--primary-border-color);
+    border-radius: 8px;
+
+    color: var(--primary-text-color);
+
+    cursor: pointer;
+}
+
+.watched-list-btn:hover {
+    background-color: var(--primary-text-color);
+    color: #fff;
+}
+
+.watched-list-container {
+    display: none;
+
+    position: absolute;
+    top: 50px;
+    left: 0;
+
+    width: 260px;
+    padding: 12px;
+
+    background-color: var(--body-bg-color);
+
+    border: 2px solid var(--primary-border-color);
+    border-radius: 8px;
+
+    color: var(--secondary-text-color);
+
+    z-index: 10;
+}
+
+.favorites-list-container p,
+.watched-list-container p {
+    padding: 6px;
+    cursor: pointer;
+}
+
 /* Header Section Ends Here */
 
 /* Input Section Starts Here */
@@ -214,6 +270,32 @@ header {
     cursor: pointer;
 
     transition: all .2s ease;
+}
+
+.movie-details-container .movie-details .watched-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    background-color: transparent;
+    color: var(--primary-text-color);
+
+    border: 2px solid var(--primary-border-color);
+    border-radius: 8px;
+
+    font-size: 1rem;
+
+    cursor: pointer;
+
+    transition: all .2s ease;
+}
+
+.movie-details-container .movie-details .watched-btn:hover,
+.movie-details-container .movie-details .watched-btn.active {
+    background-color: var(--primary-text-color);
+    color: var(--body-bg-color);
 }
 
 .movie-details-container .movie-details .favorite-btn:hover {
@@ -504,6 +586,26 @@ header {
     }
 
     .favorites-list-container {
+        width: 220px;
+        top: 42px;
+    }
+
+    .watched-container {
+        top: 62px;
+        left: 15px;
+    }
+
+    .watched-list-btn {
+        width: auto;
+        padding: 6px 8px;
+        font-size: .9rem;
+    }
+
+    .watched-list-btn span {
+        display: none;
+    }
+
+    .watched-list-container {
         width: 220px;
         top: 42px;
     }

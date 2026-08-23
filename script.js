@@ -23,6 +23,13 @@ const favoriteBtn = document.querySelector('.favorite-btn');
 const favoriteIcon = favoriteBtn.querySelector('i');
 const favoriteText = favoriteBtn.querySelector('span');
 
+const watchedBtn = document.querySelector('.watched-btn');
+const watchedIcon = watchedBtn.querySelector('i');
+const watchedText = watchedBtn.querySelector('span');
+
+const watchedListBtn = document.querySelector('.watched-list-btn');
+const WatchedListContainer = document.querySelector('.watched-list-container');
+
 let currentMovie = null;
 
 const favoritesBtn = document.querySelector('.favorites-btn');
@@ -139,6 +146,9 @@ const showMovieDetails = (movieObj) => {
 
         const movieIsFavorite = isMovieFavorite(movieObj.id);
         updatedFavoriteButton(movieIsFavorite);
+
+        const movieIsWatched = isMovieWatched(movieObj.id);
+        updatedWatchedButton(movieIsWatched);
 
         const movieImageURL = movieObj.poster_path !== null ? baseURL + movieObj.poster_path : "./images/gray background.jpg";
         const movieName = movieObj.title;
@@ -353,9 +363,110 @@ const toggleFavorite = () => {
     renderFavoritesList();
 };
 
+const getWatchedMovies = () => {
+    const watchedMovies = localStorage.getItem('watchedMovies');
+
+    if (watchedMovies === null) {
+        return [];
+    }
+
+    try {
+        const parsedMovies = JSON.parse(watchedMovies);
+        return Array.isArray(parsedMovies)
+            ? parsedMovies
+            : [];
+    }
+    catch (error) {
+        console.warn(
+            'A lista de assistidos estava invalida e foi ignorada.'
+        );
+        return [];
+    }
+};
+
+const saveWatchedMovies = (watchedMovies) => {
+    localStorage.setItem('watchedMovies', JSON.stringify(watchedMovies));
+};
+
+const isWatched = (movieId) => {
+    const watchedMovies = getWatchedMovies();
+
+    return watchedMovies.some(movie => movie.Id === movieId);
+};
+
+const updatedWatchedButton = (wasWatched) => {
+    watchedBtn.classList.toggle('active', wasWatched);
+
+    watchedIcon.classList.toggle('fa-regular', !wasWatched);
+
+    watchedIcon.classList.toggle('fa-solid', wasWatched);
+
+    watchedText.textContent = wasWatched
+        ? 'Assistido'
+        : 'Marcar como assistido';
+};
+
+const renderWatchedList = () => {
+    const watchedMovies = getWatchedMovies();
+
+    watchedListContainer.replaceChildren;
+
+    if (watchedMovies.length === 0) {
+        const emptyMessage = document.createElement('p');
+        emptyMessage.textContent = 'Nenhum filme assistido';
+
+        watchedListContainer.appendChild(emptyMessage);
+        return;
+    }
+
+    watchedMovies.forEach(movie => {
+        const moveItem = document.createElement('p');
+        movieItem.textContent = movie.title;
+
+        movieItem.addEventListener('click', showMovieDetails(movie));
+
+        watchedListContainer.appendChild(movieItem);
+    });
+};
+
+const toggleWatchedList = () => {
+    const listIsOpen = watchedListContainer.style.display === 'block';
+
+    if (!listIsOpen) {
+        renderWatchedList();
+    }
+
+    watchedListContainer.style.display = listIsOpen ? 'none' : 'block';
+};
+
+const toggleWatched = () => {
+    if (currentMovie === null) {
+        return;
+    }
+
+    const watchedMovies = getWatchedMovies();
+    const movieWasWatched = wachedMovies.some(movie => movie.id === currentMovie.id);
+
+    if (movieWasWatched) {
+        const updatedMovies = watchedMovies.filter(movie => movie.id !== currentMovie.id);
+        saveWatchedMovies(updatedMovies);
+        updatedWatchedButton(false);
+    }
+    else {
+        watchedMovies.push(currentMovie);
+        saveWatchedMovies(updatedMovies);
+        updatedWatchedButton(true);
+    }
+    renderWatchedList();
+};
+
+
+
 searchInput.addEventListener('input', searchMovie);
 searchInput.addEventListener('focusout', hideSearchMovieListContainer);
 lightModeBtn.addEventListener('click', toggleTheme);
 darkModeBtn.addEventListener('click', toggleTheme);
 favoritesBtn.addEventListener('click', toggleFavoritesList);
 favoriteBtn.addEventListener('click', toggleFavorite);
+watchedBtn.addEventListener('click', toggleWatched);
+watchedBtn.addEventListener('clikc', toggleWatchedList);

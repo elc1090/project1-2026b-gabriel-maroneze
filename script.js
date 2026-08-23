@@ -28,7 +28,7 @@ const watchedIcon = watchedBtn.querySelector('i');
 const watchedText = watchedBtn.querySelector('span');
 
 const watchedListBtn = document.querySelector('.watched-list-btn');
-const WatchedListContainer = document.querySelector('.watched-list-container');
+const watchedListContainer = document.querySelector('.watched-list-container');
 
 let currentMovie = null;
 
@@ -334,6 +334,7 @@ const toggleFavoritesList = () => {
     const listIsOpen = favoritesListContainer.style.display === 'block';
 
     if (!listIsOpen) {
+        watchedListContainer.style.display = 'none';
         renderFavoritesList();
     }
 
@@ -388,10 +389,10 @@ const saveWatchedMovies = (watchedMovies) => {
     localStorage.setItem('watchedMovies', JSON.stringify(watchedMovies));
 };
 
-const isWatched = (movieId) => {
+const isMovieWatched = (movieId) => {
     const watchedMovies = getWatchedMovies();
 
-    return watchedMovies.some(movie => movie.Id === movieId);
+    return watchedMovies.some(movie => movie.id === movieId);
 };
 
 const updatedWatchedButton = (wasWatched) => {
@@ -409,7 +410,7 @@ const updatedWatchedButton = (wasWatched) => {
 const renderWatchedList = () => {
     const watchedMovies = getWatchedMovies();
 
-    watchedListContainer.replaceChildren;
+    watchedListContainer.replaceChildren();
 
     if (watchedMovies.length === 0) {
         const emptyMessage = document.createElement('p');
@@ -420,7 +421,7 @@ const renderWatchedList = () => {
     }
 
     watchedMovies.forEach(movie => {
-        const moveItem = document.createElement('p');
+        const movieItem = document.createElement('p');
         movieItem.textContent = movie.title;
 
         movieItem.addEventListener('click', showMovieDetails(movie));
@@ -433,6 +434,7 @@ const toggleWatchedList = () => {
     const listIsOpen = watchedListContainer.style.display === 'block';
 
     if (!listIsOpen) {
+        favoritesListContainer.style.display = 'none';
         renderWatchedList();
     }
 
@@ -445,7 +447,7 @@ const toggleWatched = () => {
     }
 
     const watchedMovies = getWatchedMovies();
-    const movieWasWatched = wachedMovies.some(movie => movie.id === currentMovie.id);
+    const movieWasWatched = watchedMovies.some(movie => movie.id === currentMovie.id);
 
     if (movieWasWatched) {
         const updatedMovies = watchedMovies.filter(movie => movie.id !== currentMovie.id);
@@ -454,13 +456,11 @@ const toggleWatched = () => {
     }
     else {
         watchedMovies.push(currentMovie);
-        saveWatchedMovies(updatedMovies);
+        saveWatchedMovies(watchedMovies);
         updatedWatchedButton(true);
     }
     renderWatchedList();
 };
-
-
 
 searchInput.addEventListener('input', searchMovie);
 searchInput.addEventListener('focusout', hideSearchMovieListContainer);
@@ -469,4 +469,4 @@ darkModeBtn.addEventListener('click', toggleTheme);
 favoritesBtn.addEventListener('click', toggleFavoritesList);
 favoriteBtn.addEventListener('click', toggleFavorite);
 watchedBtn.addEventListener('click', toggleWatched);
-watchedBtn.addEventListener('click', toggleWatchedList);
+watchedListBtn.addEventListener('click', toggleWatchedList);

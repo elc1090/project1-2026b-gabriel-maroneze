@@ -14,84 +14,36 @@ const apiPaths = {
         `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${API_KEY}`
 };
 
+const searchInput = document.querySelector('.input-field input');
+const darkModeBtn = document.querySelector('header .theme-mode-btns .dark-mode');
+const lightModeBtn = document.querySelector('header .theme-mode-btns .light-mode');
+const searchMovieListContainer = document.querySelector('.search-movie-list-container');
+const movieContainer = document.querySelector('.movie-container');
+const castContainer = document.querySelector('.movie-container .cast-details-container');
+const castDetailsContainer = document.querySelector('.movie-container .cast-details-container .cast-details');
 
-// DOM Elements
-const searchInput = document.querySelector(
-    '.input-field input'
-);
-
-const darkModeBtn = document.querySelector(
-    'header .theme-mode-btns .dark-mode'
-);
-
-const lightModeBtn = document.querySelector(
-    'header .theme-mode-btns .light-mode'
-);
-
-const searchMovieListContainer = document.querySelector(
-    '.search-movie-list-container'
-);
-
-const movieContainer = document.querySelector(
-    '.movie-container'
-);
-
-const castContainer = document.querySelector(
-    '.movie-container .cast-details-container'
-);
-
-const castDetailsContainer = document.querySelector(
-    '.movie-container .cast-details-container .cast-details'
-);
-
-const adultContentElement = document.querySelector(
-    '.movie-details-container .movie-details .adult-content span'
-);
-
-const originalLanguageElement = document.querySelector(
-    '.movie-details-container .movie-details .original-language span'
-);
+const adultContentElement = document.querySelector('.movie-details-container .movie-details .adult-content span');
+const originalLanguageElement = document.querySelector('.movie-details-container .movie-details .original-language span');
 
 
-// Favorite Elements
-const favoriteBtn = document.querySelector(
-    '.favorite-btn'
-);
-
+const favoriteBtn = document.querySelector('.favorite-btn');
 const favoriteIcon = favoriteBtn.querySelector('i');
 const favoriteText = favoriteBtn.querySelector('span');
+const favoritesBtn = document.querySelector('.favorites-btn');
+const favoritesListContainer = document.querySelector('.favorites-list-container');
 
-const favoritesBtn = document.querySelector(
-    '.favorites-btn'
-);
-
-const favoritesListContainer = document.querySelector(
-    '.favorites-list-container'
-);
-
-
-// Watched Elements
-const watchedBtn = document.querySelector(
-    '.watched-btn'
-);
-
+const watchedBtn = document.querySelector('.watched-btn');
 const watchedIcon = watchedBtn.querySelector('i');
 const watchedText = watchedBtn.querySelector('span');
+const watchedListBtn = document.querySelector('.watched-list-btn');
+const watchedListContainer = document.querySelector('.watched-list-container');
 
-const watchedListBtn = document.querySelector(
-    '.watched-list-btn'
-);
+const personalRatingContainer = document.querySelector('.personal-rating-container');
+const personalRatingStars = document.querySelector('.personal-rating-stars');
+const personalRatingValue = document.querySelector('.personal-rating-value');
 
-const watchedListContainer = document.querySelector(
-    '.watched-list-container'
-);
-
-
-// Currently Selected Movie
 let currentMovie = null;
 
-
-// Find Genres
 const findGenres = async (genreIds) => {
     const genres = [];
 
@@ -116,8 +68,6 @@ const findGenres = async (genreIds) => {
     }
 };
 
-
-// Adult Content
 const getAdultContent = (adult) => {
     if (adult === true) {
         return "Sim";
@@ -126,8 +76,6 @@ const getAdultContent = (adult) => {
     return "Não";
 };
 
-
-// Original Language
 const getOriginalLanguage = (language) => {
     if (!language) {
         return "Não Informado";
@@ -151,34 +99,16 @@ const getOriginalLanguage = (language) => {
 };
 
 
-// Rating Stars
 const updateRatingStars = (rating) => {
-    const ratingStarsElement = document.querySelector(
-        '.rating-stars'
-    );
-
+    const ratingStarsElement = document.querySelector('.rating-stars');
     ratingStarsElement.replaceChildren();
+    const integerRating = Math.floor(Number(rating));
+    const starsAmount = Math.max(1, Math.min(10, integerRating));
 
-    const integerRating = Math.floor(
-        Number(rating)
-    );
-
-    const starsAmount = Math.max(
-        1,
-        Math.min(10, integerRating)
-    );
-
-    for (
-        let index = 0;
-        index < starsAmount;
-        index++
-    ) {
+    for (let index = 0; index < starsAmount; index++) {
         const starIcon = document.createElement('i');
 
-        starIcon.classList.add(
-            'fa-solid',
-            'fa-star'
-        );
+        starIcon.classList.add('fa-solid', 'fa-star');
 
         ratingStarsElement.appendChild(starIcon);
     }
@@ -189,33 +119,23 @@ const updateRatingStars = (rating) => {
     );
 };
 
-
-// Clear Genres
 const clearGenresList = (genresList) => {
     Array.from(genresList.children).forEach(child => {
         child.remove();
     });
 };
 
-
-// Clear Cast
 const clearCastDetailsContainer = () => {
-    Array.from(
-        castDetailsContainer.children
-    ).forEach(child => {
+    Array.from(castDetailsContainer.children).forEach(child => {
         child.remove();
     });
 };
 
-
-// Add Cast
 const addCastToCastDetailsContainer = async (movieId) => {
     clearCastDetailsContainer();
 
     try {
-        const response = await fetch(
-            apiPaths.findCast(movieId)
-        );
+        const response = await fetch(apiPaths.findCast(movieId));
 
         const data = await response.json();
 
@@ -262,17 +182,15 @@ const showMovieDetails = (movieObject) => {
     return () => {
         currentMovie = movieObject;
 
-        const movieIsFavorite = isMovieFavorite(
-            movieObject.id
-        );
+        const movieIsFavorite = isMovieFavorite(movieObject.id);
 
         updatedFavoriteButton(movieIsFavorite);
 
-        const movieIsWatched = isMovieWatched(
-            movieObject.id
-        );
+        const movieIsWatched = isMovieWatched(movieObject.id);
 
         updatedWatchedButton(movieIsWatched);
+
+        updatePersonalRatingSection();
 
         const movieImageURL =
             movieObject.poster_path !== null
@@ -287,43 +205,25 @@ const showMovieDetails = (movieObject) => {
 
         const originalTitle = movieObject.original_title;
 
-        const ratings = Number(
-            movieObject.vote_average
-        ).toFixed(1);
+        const ratings = Number(movieObject.vote_average).toFixed(1);
 
         const movieDescription = movieObject.overview;
 
-        const adultContent = getAdultContent(
-            movieObject.adult
-        );
+        const adultContent = getAdultContent(movieObject.adult);
 
-        const originalLanguage = getOriginalLanguage(
-            movieObject.original_language
-        );
+        const originalLanguage = getOriginalLanguage(movieObject.original_language);
 
-        const movieImageElement = document.querySelector(
-            '.movie-details-container .movie-image img'
-        );
+        const movieImageElement = document.querySelector('.movie-details-container .movie-image img');
 
-        const movieNameElement = document.querySelector(
-            '.movie-details-container .movie-details .movie-name'
-        );
+        const movieNameElement = document.querySelector('.movie-details-container .movie-details .movie-name');
 
-        const originalTitleElement = document.querySelector(
-            '.movie-details-container .movie-details .movie-original-name span'
-        );
+        const originalTitleElement = document.querySelector('.movie-details-container .movie-details .movie-original-name span');
 
-        const ratingsElement = document.querySelector(
-            '.movie-details-container .movie-details .rating-value'
-        );
+        const ratingsElement = document.querySelector('.movie-details-container .movie-details .rating-value');
 
-        const movieDescriptionElement = document.querySelector(
-            '.movie-details-container .movie-details .description'
-        );
+        const movieDescriptionElement = document.querySelector('.movie-details-container .movie-details .description');
 
-        const genresList = document.querySelector(
-            '.movie-details-container .movie-details .genres .genres-list'
-        );
+        const genresList = document.querySelector('.movie-details-container .movie-details .genres .genres-list');
 
         movieImageElement.src = movieImageURL;
 
@@ -333,40 +233,29 @@ const showMovieDetails = (movieObject) => {
         originalTitleElement.textContent = originalTitle;
         ratingsElement.textContent = ratings;
 
-        updateRatingStars(
-            movieObject.vote_average
-        );
+        updateRatingStars(movieObject.vote_average);
 
-        movieDescriptionElement.textContent =
-            movieDescription || "Descrição não informada.";
+        movieDescriptionElement.textContent = movieDescription || "Descrição não informada.";
 
         adultContentElement.textContent = adultContent;
 
-        originalLanguageElement.textContent =
-            originalLanguage;
+        originalLanguageElement.textContent = originalLanguage;
 
-        findGenres(
-            movieObject.genre_ids.slice(0, 5)
-        )
-            .then(genres => {
-                clearGenresList(genresList);
+        findGenres(movieObject.genre_ids.slice(0, 5)).then(genres => {
+            clearGenresList(genresList);
 
-                genres.forEach(genre => {
-                    const listItem =
-                        document.createElement('li');
-
-                    listItem.textContent = genre;
-
-                    genresList.appendChild(listItem);
-                });
-            })
+            genres.forEach(genre => {
+                const listItem =
+                    document.createElement('li');
+                listItem.textContent = genre;
+                genresList.appendChild(listItem);
+            });
+        })
             .catch(error => {
                 console.log(error);
             });
 
-        addCastToCastDetailsContainer(
-            movieObject.id
-        );
+        addCastToCastDetailsContainer(movieObject.id);
 
         movieContainer.style.display = "block";
         searchMovieListContainer.style.display = "none";
@@ -377,18 +266,12 @@ const showMovieDetails = (movieObject) => {
     };
 };
 
-
-// Clear Search List
 const clearSearchMovieListContainer = () => {
-    Array.from(
-        searchMovieListContainer.children
-    ).forEach(child => {
+    Array.from(searchMovieListContainer.children).forEach(child => {
         child.remove();
     });
 };
 
-
-// Build Search List
 const buildSearchMovieList = (moviesList) => {
     if (searchInput.value !== "") {
         searchMovieListContainer.style.display = "block";
@@ -406,15 +289,10 @@ const buildSearchMovieList = (moviesList) => {
 
         searchMovieListContainer.appendChild(movieItem);
 
-        movieItem.addEventListener(
-            'click',
-            showMovieDetails(movie)
-        );
+        movieItem.addEventListener('click', showMovieDetails(movie));
     });
 };
 
-
-// Search Movie
 const searchMovie = () => {
     const query = searchInput.value.trim();
 
@@ -437,7 +315,6 @@ const searchMovie = () => {
 };
 
 
-// Toggle Theme
 const toggleTheme = () => {
     if (lightModeBtn.style.display !== "none") {
         darkModeBtn.style.display = "block";
@@ -514,8 +391,6 @@ const toggleTheme = () => {
     }
 };
 
-
-// Hide Search List
 const hideSearchMovieListContainer = () => {
     setTimeout(() => {
         searchMovieListContainer.style.display = "none";
@@ -523,7 +398,6 @@ const hideSearchMovieListContainer = () => {
 };
 
 
-// Get Favorites
 const getFavorites = () => {
     const favorites = localStorage.getItem(
         'favorites'
@@ -550,50 +424,27 @@ const getFavorites = () => {
     }
 };
 
-
-// Save Favorites
 const saveFavorites = (favorites) => {
-    localStorage.setItem(
-        'favorites',
-        JSON.stringify(favorites)
-    );
+    localStorage.setItem('favorites', JSON.stringify(favorites));
 };
 
-
-// Check Favorite
 const isMovieFavorite = (movieId) => {
     const favorites = getFavorites();
 
-    return favorites.some(
-        movie => movie.id === movieId
-    );
+    return favorites.some(movie => movie.id === movieId);
 };
 
-
-// Update Favorite Button
 const updatedFavoriteButton = (isFavorite) => {
-    favoriteBtn.classList.toggle(
-        'active',
-        isFavorite
-    );
+    favoriteBtn.classList.toggle('active', isFavorite);
+    favoriteIcon.classList.toggle('fa-regular', !isFavorite);
 
-    favoriteIcon.classList.toggle(
-        'fa-regular',
-        !isFavorite
-    );
-
-    favoriteIcon.classList.toggle(
-        'fa-solid',
-        isFavorite
-    );
+    favoriteIcon.classList.toggle('fa-solid', isFavorite);
 
     favoriteText.textContent = isFavorite
         ? 'Favoritado'
         : 'Adicionar aos Favoritos';
 };
 
-
-// Render Favorites List
 const renderFavoritesList = () => {
     const favorites = getFavorites();
 
@@ -603,13 +454,9 @@ const renderFavoritesList = () => {
         const emptyMessage =
             document.createElement('p');
 
-        emptyMessage.textContent =
-            'Nenhum filme favoritado';
+        emptyMessage.textContent = 'Nenhum filme favoritado';
 
-        favoritesListContainer.appendChild(
-            emptyMessage
-        );
-
+        favoritesListContainer.appendChild(emptyMessage);
         return;
     }
 
@@ -619,26 +466,17 @@ const renderFavoritesList = () => {
 
         movieItem.textContent = movie.title;
 
-        movieItem.addEventListener(
-            'click',
-            showMovieDetails(movie)
-        );
+        movieItem.addEventListener('click', showMovieDetails(movie));
 
-        favoritesListContainer.appendChild(
-            movieItem
-        );
+        favoritesListContainer.appendChild(movieItem);
     });
 };
 
-
-// Toggle Favorites List
 const toggleFavoritesList = () => {
-    const listIsOpen =
-        favoritesListContainer.style.display === 'block';
+    const listIsOpen = favoritesListContainer.style.display === 'block';
 
     if (!listIsOpen) {
         watchedListContainer.style.display = 'none';
-
         renderFavoritesList();
     }
 
@@ -646,23 +484,17 @@ const toggleFavoritesList = () => {
         listIsOpen ? 'none' : 'block';
 };
 
-
-// Toggle Favorite
 const toggleFavorite = () => {
     if (currentMovie === null) {
         return;
     }
 
     const favorites = getFavorites();
-
-    const movieIsFavorite = favorites.some(
-        movie => movie.id === currentMovie.id
+    const movieIsFavorite = favorites.some(movie => movie.id === currentMovie.id
     );
 
     if (movieIsFavorite) {
-        const updatedFavorites = favorites.filter(
-            movie => movie.id !== currentMovie.id
-        );
+        const updatedFavorites = favorites.filter(movie => movie.id !== currentMovie.id);
 
         saveFavorites(updatedFavorites);
         updatedFavoriteButton(false);
@@ -678,71 +510,138 @@ const toggleFavorite = () => {
 };
 
 
-// Get Watched Movies
 const getWatchedMovies = () => {
-    const watchedMovies = localStorage.getItem(
-        'watchedMovies'
-    );
+    const watchedMovies = localStorage.getItem('watchedMovies');
 
     if (watchedMovies === null) {
         return [];
     }
 
     try {
-        const parsedMovies = JSON.parse(
-            watchedMovies
-        );
+        const parsedMovies = JSON.parse(watchedMovies);
 
         return Array.isArray(parsedMovies)
             ? parsedMovies
             : [];
     }
     catch (error) {
-        console.warn(
-            'A lista de assistidos estava inválida e foi ignorada.',
-            error
-        );
-
+        console.warn('A lista de assistidos estava inválida e foi ignorada.', error);
         return [];
     }
 };
 
 
-// Save Watched Movies
 const saveWatchedMovies = (watchedMovies) => {
-    localStorage.setItem(
-        'watchedMovies',
-        JSON.stringify(watchedMovies)
+    localStorage.setItem('watchedMovies', JSON.stringify(watchedMovies));
+};
+
+const getPersonalRatings = () => {
+    const storedRatings = localStorage.getItem('personalRatings');
+
+    if (storedRatings === null) {
+        return {};
+    }
+
+    try {
+        const parsedRatings = JSON.parse(storedRatings);
+
+        return parsedRatings && typeof parsedRatings === 'object'
+            ? parsedRatings
+            : {};
+    }
+    catch (error) {
+        console.warn('As avaliações pessoais estavam inválidas e foram ignoradas.', error);
+        return {};
+    }
+};
+
+const savePersonalRatings = (ratings) => {
+    localStorage.setItem('personalRatings', JSON.stringify(ratings)
     );
 };
 
+const getPersonalRating = (movieId) => {
+    const ratings = getPersonalRatings();
+    return Number(ratings[movieId]) || 0;
+};
 
-// Check Watched Movie
+const savePersonalRating = (movieId, rating) => {
+    const ratings = getPersonalRatings();
+    ratings[movieId] = rating;
+    savePersonalRatings(ratings);
+};
+
+const renderPersonalRating = (rating) => {
+    const starButtons = personalRatingStars.querySelectorAll('.personal-rating-star-btn');
+
+    starButtons.forEach((button, index) => {
+        const starIsFilled = index < rating;
+
+        const icon = button.querySelector('i');
+
+        icon.classList.toggle('fa-solid', starIsFilled);
+
+        icon.classList.toggle('fa-regular', !starIsFilled);
+    });
+
+    personalRatingValue.textContent = rating > 0
+        ? `Sua avaliação: ${rating}/10`
+        : 'Sem avaliação';
+};
+
+const updatePersonalRatingSection = () => {
+    if (currentMovie === null || !isMovieWatched(currentMovie.id)) {
+        personalRatingContainer.style.display = 'none';
+        return;
+    }
+    personalRatingContainer.style.display = 'flex';
+    renderPersonalRating(getPersonalRating(currentMovie.id));
+};
+
+const buildPersonalRatingStars = () => {
+    personalRatingStars.replaceChildren();
+
+    for (let rating = 1; rating <= 10; rating++) {
+        const button = document.createElement('button');
+
+        const icon = document.createElement('i');
+
+        button.type = 'button';
+        button.classList.add('personal-rating-star-btn');
+
+        button.setAttribute('aria-label', `Avaliar com ${rating} de 10 estrelas`);
+
+        icon.classList.add('fa-regular', 'fa-star');
+
+        button.appendChild(icon);
+        button.addEventListener('click', () => {
+            if (currentMovie === null || !isMovieWatched(currentMovie.id)) {
+                return;
+            }
+            savePersonalRating(currentMovie.id, rating);
+            renderPersonalRating(rating);
+        }
+        );
+        personalRatingStars.appendChild(button);
+    }
+};
+
+
+
 const isMovieWatched = (movieId) => {
     const watchedMovies = getWatchedMovies();
 
-    return watchedMovies.some(
-        movie => movie.id === movieId
-    );
+    return watchedMovies.some(movie => movie.id === movieId);
 };
 
 
-// Update Watched Button
+
 const updatedWatchedButton = (wasWatched) => {
-    watchedBtn.classList.toggle(
-        'active',
-        wasWatched
-    );
+    watchedBtn.classList.toggle('active', wasWatched);
 
-    watchedIcon.classList.toggle(
-        'fa-regular',
-        !wasWatched
-    );
+    watchedIcon.classList.toggle('fa-regular', !wasWatched);
 
-    watchedIcon.classList.toggle(
-        'fa-solid',
-        wasWatched
-    );
+    watchedIcon.classList.toggle('fa-solid', wasWatched);
 
     watchedText.textContent = wasWatched
         ? 'Assistido'
@@ -750,45 +649,30 @@ const updatedWatchedButton = (wasWatched) => {
 };
 
 
-// Render Watched List
 const renderWatchedList = () => {
     const watchedMovies = getWatchedMovies();
 
     watchedListContainer.replaceChildren();
 
     if (watchedMovies.length === 0) {
-        const emptyMessage =
-            document.createElement('p');
+        const emptyMessage = document.createElement('p');
 
-        emptyMessage.textContent =
-            'Nenhum filme assistido';
+        emptyMessage.textContent = 'Nenhum filme assistido';
 
-        watchedListContainer.appendChild(
-            emptyMessage
-        );
+        watchedListContainer.appendChild(emptyMessage);
 
         return;
     }
 
     watchedMovies.forEach(movie => {
-        const movieItem =
-            document.createElement('p');
-
+        const movieItem = document.createElement('p');
         movieItem.textContent = movie.title;
-
-        movieItem.addEventListener(
-            'click',
-            showMovieDetails(movie)
-        );
-
-        watchedListContainer.appendChild(
-            movieItem
-        );
+        movieItem.addEventListener('click', showMovieDetails(movie));
+        watchedListContainer.appendChild(movieItem);
     });
 };
 
 
-// Toggle Watched List
 const toggleWatchedList = () => {
     const listIsOpen =
         watchedListContainer.style.display === 'block';
@@ -799,12 +683,12 @@ const toggleWatchedList = () => {
         renderWatchedList();
     }
 
-    watchedListContainer.style.display =
-        listIsOpen ? 'none' : 'block';
+    watchedListContainer.style.display = listIsOpen
+        ? 'none'
+        : 'block';
 };
 
 
-// Toggle Watched Movie
 const toggleWatched = () => {
     if (currentMovie === null) {
         return;
@@ -812,14 +696,10 @@ const toggleWatched = () => {
 
     const watchedMovies = getWatchedMovies();
 
-    const movieWasWatched = watchedMovies.some(
-        movie => movie.id === currentMovie.id
-    );
+    const movieWasWatched = watchedMovies.some(movie => movie.id === currentMovie.id);
 
     if (movieWasWatched) {
-        const updatedMovies = watchedMovies.filter(
-            movie => movie.id !== currentMovie.id
-        );
+        const updatedMovies = watchedMovies.filter(movie => movie.id !== currentMovie.id);
 
         saveWatchedMovies(updatedMovies);
         updatedWatchedButton(false);
@@ -832,46 +712,16 @@ const toggleWatched = () => {
     }
 
     renderWatchedList();
+    updatePersonalRatingSection();
 };
 
+buildPersonalRatingStars();
 
-// Event Listeners
-searchInput.addEventListener(
-    'input',
-    searchMovie
-);
-
-searchInput.addEventListener(
-    'focusout',
-    hideSearchMovieListContainer
-);
-
-lightModeBtn.addEventListener(
-    'click',
-    toggleTheme
-);
-
-darkModeBtn.addEventListener(
-    'click',
-    toggleTheme
-);
-
-favoritesBtn.addEventListener(
-    'click',
-    toggleFavoritesList
-);
-
-favoriteBtn.addEventListener(
-    'click',
-    toggleFavorite
-);
-
-watchedBtn.addEventListener(
-    'click',
-    toggleWatched
-);
-
-watchedListBtn.addEventListener(
-    'click',
-    toggleWatchedList
-);
+searchInput.addEventListener('input', searchMovie);
+searchInput.addEventListener('focusout', hideSearchMovieListContainer);
+lightModeBtn.addEventListener('click', toggleTheme);
+darkModeBtn.addEventListener('click', toggleTheme);
+favoritesBtn.addEventListener('click', toggleFavoritesList);
+favoriteBtn.addEventListener('click', toggleFavorite);
+watchedBtn.addEventListener('click', toggleWatched);
+watchedListBtn.addEventListener('click', toggleWatchedList);

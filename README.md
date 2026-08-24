@@ -118,6 +118,14 @@ Por fim, não incluí a imagem de capa do filme como "plano de fundo" para as in
 
 ### Trechos de código
 
+<img width="1265" height="612" alt="Captura de tela 2026-08-24 140832" src="https://github.com/user-attachments/assets/8e3d4a4c-c031-4a84-b5b6-d6cb05fecc85" />
+
+
+<img width="1240" height="713" alt="Captura de tela 2026-08-24 140743" src="https://github.com/user-attachments/assets/b64b7e4c-9022-4e4c-91d9-2e53ca54d454" />
+
+
+<img width="1247" height="622" alt="Captura de tela 2026-08-24 140643" src="https://github.com/user-attachments/assets/31c6768d-8f5f-4176-b668-98366b14f9ef" />
+
 
 
 

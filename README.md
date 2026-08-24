@@ -31,6 +31,13 @@ Utilizei o chatGPT para adaptar a logo existente e o CanvaAI para remover o fund
 - **Pós Aula:** Acrescentei o botão para a aba de favoritos
 
 **Dia 21/08/2026:**
+- Adição do botão com a opção de favoritar filmes
+
+**Dia 23/08/2026:**
+- Adição da parte de localstorage para armazenar os filmes favoritos
+- Replicação do conteúdo de filmes favoritos para acrescentar a lista de filmes assistidos
+- Problemas com alterações visuais e bugs que quebraram o funcionamento do site com as novas adições
+- Uso forte do chatGPT para corrigir os erros gerados anteriormente - má implementação da parte de local storage causou tais erros, precisei recorrer ao GPT para fazer uma varredura dos erros e me informar onde corrigí-los. Também deixei os botões sobrescritos anteriormente sem querer, usei o chat para me ajudar com o alinhamento.
 
 
 

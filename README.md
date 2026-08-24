@@ -26,8 +26,7 @@ Movie Search App is built using HTML, CSS, JavaScript & TMDB API.
 > 6. Double-check: Certifique-se de que seu README.md não contenha instruções de entrega e seja visualizado corretamente ao abrir seu repositório!
 > Opcional: você pode alterar a formatação deste README, mas mantenha todas as informações solicitadas.
 
-![Substitua a imagem ao lado por um GIF/WEBP animado mostrando seu projeto](./moho_follow_through2.gif "GIF animado do projeto. Imagem temporária de Moho Animation https://moho.lostmarble.com/products/moho-pro-special-halls-head-college")
-
+<img width="712" height="378" alt="CineMaro" src="https://github.com/user-attachments/assets/bd5c4b29-b921-4c52-9f47-84415db6d822" />
 
 
 ## Acesso
@@ -37,7 +36,7 @@ Movie Search App is built using HTML, CSS, JavaScript & TMDB API.
 
 ## Desenvolvedor(a)
 
-Gabriel Maroneze Ramos (202512445) – Sistemas 
+Gabriel Maroneze Ramos (202512445) – Sistemas de Informação
 
 
 
@@ -60,35 +59,35 @@ O layout era simples e limpo, com pouquíssimos elementos
 Gabriel da Silva França
 
 ### Demanda
-1. Funcionalidades
+1.        Funcionalidades
 - Lista de Filmes Favoritos. Usuário pode “Salvar nos Favoritos” (ícone de “estrela”/”coração”) por meio de botão ou remover da lista;
 - Status de filme “Assistido” e Lista de Assistidos;
 - Avaliar Filme: um filme só pode ser avaliado se já foi assistido;
 - Informações adicionais (caso estejam disponíveis na TMDB API): Direção (Director); Duração (Runtime, formatado em horas e minutos, ex: 2h 15min); Classificação Indicativa destacada em cores diferentes (Certification, ex: L, 12, 14, 16, 18 anos);
 2.        Alterações de interface visual e design (de livre escolha):
-•        Alterar tipografia e paleta de cores da interface;
-•        Padronizar com alguma biblioteca de ícones vetoriais;
-•        Usar a imagem de capa do filme como uma “cover” da página do filme com um filtro escuro na imagem;
-•        Estilizar Gêneros e Elenco de maneira mais clara e organizada.
+- Alterar tipografia e paleta de cores da interface;
+- Padronizar com alguma biblioteca de ícones vetoriais;
+- Usar a imagem de capa do filme como uma “cover” da página do filme com um filtro escuro na imagem;
+- Estilizar Gêneros e Elenco de maneira mais clara e organizada.
 
 ## Desenvolvimento
-Dia 18/08/2026 (Período de Aula): Fiz alterações visuais na identidade do site, sendo elas:
-•	Alteração da logo e tema principal do site
-•	Alteração do tema escuro do site
-•	Tradução de dados inicialmente expostos em inglês (fixos, HTML)
+**Dia 18/08/2026 (Período de Aula):** Fiz alterações visuais na identidade do site, sendo elas:
+- Alteração da logo e tema principal do site
+- Alteração do tema escuro do site
+- Tradução de dados inicialmente expostos em inglês (fixos, HTML)
 Estou buscando como adicionar diferentes tipos de caixas de texto para trabalhar em cima da Caixa de Pesquisa (necessita da criação de uma nova fonte) e para adicionar a capa dos filmes sob determinados efeitos visuais no background. Utilizei o chatGPT para adaptar a logo existente e o CanvaAI para remover o fundo da nova versão da imagem para utilização. A parte de colorações e alteração de textos já era de meu conhecimento prévio (única coisa que me recordo em html/css que aprendi no 1°semestre kkkk)
-Dia 20/08/2026 (Período de Aula e pré-aula): Adição de novas informações sobre cada filme, conforme solicitado na requisição
-•	Alteração dos arquivos Javascript e HTML para a funcionalidade de buscar o indicador de Conteúdo Adulto e Linguagem Original do filme
-•	Alteração do arquivo styleCSS para padronizar a aparição das informações conforme as demais já existentes
-•	Pós Aula: Acrescentei o botão para a aba de favoritos
-Dia 21/08/2026:
-•	Adição do botão com a opção de favoritar filmes
-Dia 23/08/2026:
-•	Adição da parte de localstorage para armazenar os filmes favoritos
-•	Replicação da lógica/funções da lista de filmes favoritos para acrescentar a lista de filmes assistidos, adaptando as necessidades
-•	Problemas com alterações visuais e bugs que quebraram o funcionamento do site com as novas adições
-•	Uso forte do chatGPT para corrigir os erros gerados anteriormente - má implementação da parte de local storage causou tais erros, precisei recorrer ao GPT para fazer uma varredura dos erros e me informar onde corrigí-los. Também deixei os botões sobrescritos anteriormente sem querer, usei o chat para me ajudar com o alinhamento.
-•	Adição da opção para dar uma avaliação pessoal do usuário (1 – 10 estrelas), garantindo que essa só apareça caso o filme esteja marcado na lista de Assistidos. Também uso do localStorage para armazenar os dados 
+**Dia 20/08/2026 (Período de Aula e pré-aula):** Adição de novas informações sobre cada filme, conforme solicitado na requisição
+- Alteração dos arquivos Javascript e HTML para a funcionalidade de buscar o indicador de Conteúdo Adulto e Linguagem Original do filme
+- Alteração do arquivo styleCSS para padronizar a aparição das informações conforme as demais já existentes
+- Pós Aula: Acrescentei o botão para a aba de favoritos
+**Dia 21/08/2026:**
+- Adição do botão com a opção de favoritar filmes
+**Dia 23/08/2026:**
+- Adição da parte de localstorage para armazenar os filmes favoritos
+- Replicação da lógica/funções da lista de filmes favoritos para acrescentar a lista de filmes assistidos, adaptando as necessidades
+- Problemas com alterações visuais e bugs que quebraram o funcionamento do site com as novas adições
+- Uso forte do chatGPT para corrigir os erros gerados anteriormente - má implementação da parte de local storage causou tais erros, precisei recorrer ao GPT para fazer uma varredura dos erros e me informar onde corrigi-los. Também deixei os botões sobrescritos anteriormente sem querer, usei o chat para me ajudar com o alinhamento.
+- Adição da opção para dar uma avaliação pessoal do usuário (1 – 10 estrelas), garantindo que essa só apareça caso o filme esteja marcado na lista de Assistidos. Também uso do localStorage para armazenar os dados 
 
 
 ### Processo

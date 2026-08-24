@@ -679,7 +679,6 @@ const toggleWatchedList = () => {
 
     if (!listIsOpen) {
         favoritesListContainer.style.display = 'none';
-
         renderWatchedList();
     }
 

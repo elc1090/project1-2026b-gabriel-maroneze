@@ -100,11 +100,25 @@ Estou buscando como adicionar diferentes tipos de caixas de texto para trabalhar
 
 ### Processo
 
-Substitua este texto por uma descrição do processo de desenvolvimento **em primeira pessoa, sem ajuda de IA**, explicando como você buscou entender o código existente, o que conhecia ou não, como lidou com as demandas (quais foram atendidas, não-atendidas, substituídas/adicionadas). 
+Inicialmente eu tentei ler o código de cabo a rabo para entender melhor seu funcionamento. Algumas funções mais básicas de Javascript (como o botão de modo escuro) e as partes de HTML/CSS eu consegui compreender mais facilmente por causa do curso de Desenvolvimento Web do PET SI que participei. 
+
+A parte da API e busca de dados por ela, entendi de forma bem abstrata, assim como algumas das funções mais complexas. Essas partes, posteriormente eu solicitei ao ChatGPT para me entregar explicações sobre o conteúdo utilizando todos os conceitos que apareciam no código anteriormente. 
+
+Para adicionar os botões de favoritos/assistidos, foi bem tranquilo, porque ainda lembrava do básico sobre esse tipo de implementação. Precisei recorrer a ajuda em função do localStorage, a implementação desses botões para cada filme que aparecesse (tentei fazer sozinho e acabei incluindo errado no HTML, dando erros ao buscar os filmes).
+
+Além das dificuldades acima, também apanhei um pouco para adicionar os elementos nas posições corretas. Algumas versões do projeto ficaram com sobreposição de botões, imagens e até mesmo a logo foi interpretada como parte da divisória dos botões de favoritos durante um momento. Precisei de apoio do GPT para corrigir e deixar as partições simétricas e bem encaixadas.
+
+Fiz as alterações no CSS para a aparência geral do site tranquilamente logo no início do projeto (mudança de modo escuro, cores, textos, etc).
+
+Ficou faltando a implementação de uma forma de puxar o diretor e classificação indicatória dos filmes, que não encontrei na API. Em compensação, adicionei infos de Idioma Original e Sinalizador de Conteúdo Adulto.
+
+Também não mexi com outras bibliotecas vetoriais porque o projeto já contava com a utilização da Font Awesome. Não senti a necessidade de buscar por novas para a implementação e meu tempo ficou curto também kkk
+
+Por fim, não incluí a imagem de capa do filme como "plano de fundo" para as informações de cada filme porque encontrei dificuldades em aplicar o filtro de embaçamento/escurecimento de imagens, bem como tratar a mudança da cor da fonte de cada letra caso uma única cor fixa ficasse ruim em certos casos. Meu tempo ficou curto pra pesquisar mais afundo sobre isso, mas seria meu próximo passo.
 
 ### Trechos de código
 
-Indique pelo menos 3 trechos de código que você queira destacar para a turma (por exemplo, para contrastar com o código original, para explicar algo que aprendeu, para alertar sobre alguma dificuldade de compreensão, para mostrar uma curiosidade, etc).
+
 
 
 ## Tecnologias
@@ -113,15 +127,16 @@ Indique pelo menos 3 trechos de código que você queira destacar para a turma (
 
 - Linguagens: HTML, JavaScript, CSS
 - API de Dados: TMDB API (original do projeto)
+- API para Armazenamento: LocalStorage (fornecida pelo navegador)
 - Biblioteca vetorial: Font Awesome 6.5.1 (original do projeto)
 - CDN: cdnjs (original do projeto)
 - IA: ChatGPT
 
 ### Ambiente de desenvolvimento
 
-Código desenvolvido usando o vsCode
-- IA Generativa utilizada no desenvolvimento: (ChatGPT Workspace)
-- IA utilizada para refinamento da logo: CanvaAI
+- Código desenvolvido usando o vsCode com as extensões: Django, Elm, GitHub Actions, GitHub Pull Requests, GitHub Codespaces, JSON Crack, Test Adapter Converter, Test Explorer UI;
+- IA Generativa utilizada no desenvolvimento: (ChatGPT Workspace);
+- IA utilizada para refinamento da logo: CanvaAI;
 
 ## Referências e créditos
 
@@ -132,7 +147,7 @@ Exemplos de Prompts que utilizei para reaprender/aprender conceitos básicos de 
  Estou estudando sobre Desenvolvimento Web na faculdade e para aprender sobre HTML, CSS e JavaScript, me foi dada a tarefa de analisar e recriar um site (já estou no processo das alterações visuais com o que estou enviando os arquivos).
 Para isso, preciso que você me apresente cada parte desses arquivos com explicações sobre as funcionalidades usadas nela. Fale sobre até mesmo os aspectos mais básicos e funcionais da linguagem, como atribuição de variável, estruturas condicionais e de repetição, entre outras funcionalidades como por exemplo a integração entre os arquivos e questões de servidor/cliente
 2.	Chat, agora vamos adicionar o sistema de armazenamento local no localStorage. Ainda siga o mesmo modelo de ensino para a parte de desenvolvimento web.
-Utilizei o GPT tanto para a aplicação do LocalStorage, quanto apra me explicar sua funcionalidade para a parte de Favoritos (implementada inicialmente). Para a parte de Filmes Assistidos, consegui implementar por conta própria após entender o funcionamento do código
+Utilizei o GPT tanto para a aplicação do LocalStorage, quanto para me explicar sua funcionalidade para a parte de Favoritos (implementada inicialmente). Para a parte de Filmes Assistidos, consegui implementar por conta própria após entender o funcionamento do código
 
 ---
 Projeto entregue para a disciplina de [Desenvolvimento de Software para a Web](http://github.com/andreainfufsm/elc1090-2026b) em 2026b
